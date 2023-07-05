@@ -5,10 +5,13 @@ import { RiContactsLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/selectors';
 import Notiflix from 'notiflix';
+import { Loader } from 'components/Loader/Loader';
+import { selectIsLoading } from 'redux/contacts/selectors';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -43,7 +46,8 @@ const ContactForm = () => {
           placeholder="Number"
         />
         <AddButton type="submit">
-          <span>Add contacts </span> <RiContactsLine size="20" />
+          <span>Add contacts </span>
+          {isLoading ? <Loader /> : <RiContactsLine size="20" />}
         </AddButton>
       </Form>
     </>

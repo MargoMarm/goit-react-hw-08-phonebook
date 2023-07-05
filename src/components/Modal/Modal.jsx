@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editContact } from 'redux/contacts/operation';
 import {
   BtnClose,
@@ -10,26 +10,31 @@ import {
   Icon,
 } from './Modal.styled';
 import { RiContactsLine } from 'react-icons/ri';
+import { Loader } from 'components/Loader/Loader';
+import { selectIsLoading } from 'redux/contacts/selectors';
 
-const Modal = ({ contactInfo, onClick }) => {
+const Modal = ({ contactInfo, toggleOpen }) => {
 	const { name, number, id } = contactInfo;
-	console.log(name, number)
+	console.log(contactInfo);
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+
   const handleSubmit = e => {
     e.preventDefault();
     const { name, number } = e.target;
 	  const contact = { name: name.value, number: number.value, id };
-	  console.log(contact)
+	  console.log(id)
     dispatch(editContact(contact));
+   //  toggleOpen();
   };
-	
-    
-	
+
   return (
     <Overlay>
       <ModalWindow>
         <Form onSubmit={handleSubmit}>
-        <BtnClose onClick={onClick}><Icon size="30"/></BtnClose>
+          <BtnClose onClick={toggleOpen}>
+            <Icon size="30" />
+          </BtnClose>
           <Input
             type="text"
             name="name"
@@ -49,7 +54,8 @@ const Modal = ({ contactInfo, onClick }) => {
             defaultValue={number}
           />
           <AddButton type="submit">
-            <span>Edit contacts </span> <RiContactsLine size="20" />
+            <span>Edit contacts </span>{' '}
+            {isLoading ? <Loader /> : <RiContactsLine size="20" />}
           </AddButton>
         </Form>
       </ModalWindow>

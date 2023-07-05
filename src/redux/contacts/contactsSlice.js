@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
-import { addContact, deleteContact, fetchContacts } from './operation';
+import {
+  addContact,
+  deleteContact,
+  editContact,
+  fetchContacts,
+} from './operation';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -8,6 +13,7 @@ const handlePending = state => {
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
+
   state.error = action.payload;
 };
 
@@ -18,8 +24,7 @@ export const contactsSlice = createSlice({
     error: null,
     isLoading: false,
     sortedAlphabetic: true,
-	  recentlyAdded: true,
-	 
+    recentlyAdded: true,
   },
   reducers: {
     sortByName(state) {
@@ -38,12 +43,18 @@ export const contactsSlice = createSlice({
       );
       state.recentlyAdded = !state.recentlyAdded;
     },
-  },
+	},
+  
+
 
   extraReducers: {
     [fetchContacts.pending]: handlePending,
     [addContact.pending]: handlePending,
     [deleteContact.pending]: handlePending,
+	  [editContact.pending](state, action) {
+		  state.isLoading = true;
+		  state.shouldOpenModal = true;
+	 },
 
     [fetchContacts.rejected]: handleRejected,
     [addContact.rejected]: handleRejected,
@@ -70,6 +81,15 @@ export const contactsSlice = createSlice({
       state.contacts = state.contacts.filter(
         contact => contact.id !== action.payload.id
       );
+    },
+    [editContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.contacts.findIndex(
+        contact => contact.id === action.payload.id
+      );
+
+      state.contacts[index] = action.payload;
     },
   },
 });

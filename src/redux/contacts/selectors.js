@@ -12,6 +12,7 @@ export const selectSortedAlphabetic = state => state.contacts.sortedAlphabetic;
 
 export const selectRecentlyAdded = state => state.contacts.recentlyAdded;
 
+
 export const selectVisibleContacts = createSelector(
   [selectContacts, selectFilter],
 	(contacts, filterValue) => {

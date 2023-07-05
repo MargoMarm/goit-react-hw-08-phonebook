@@ -9,7 +9,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import { composeWithDevTools } from '@redux-devtools/extension';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 import contactsReducer from './contacts/contactsSlice';

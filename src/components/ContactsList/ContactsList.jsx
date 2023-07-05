@@ -3,16 +3,20 @@ import Modal from '../Modal/Modal';
 import { RiDeleteBin2Line, RiEditLine } from 'react-icons/ri';
 import { deleteContact } from 'redux/contacts/operation';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectVisibleContacts } from 'redux/contacts/selectors';
+import {
+  selectIsLoading,
+  selectVisibleContacts,
+} from 'redux/contacts/selectors';
 import SortedBtns from 'components/SortedBtns/SortedBtns';
 import { useState } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 const ContactList = () => {
   let visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const toggleOpen = () => setIsModalOpen(!isModalOpen);
-	
+  const isLoading = useSelector(selectIsLoading);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleOpen = () => setIsModalOpen(!isModalOpen);
   return (
     <>
       <SortedBtns />
@@ -30,10 +34,15 @@ const ContactList = () => {
                   type="button"
                   onClick={() => dispatch(deleteContact(id))}
                 >
-                  <RiDeleteBin2Line size="20" />
+                  {isLoading ? <Loader /> : <RiDeleteBin2Line size="20" />}
                 </Btn>
               </BtnWrapper>
-					 {isModalOpen && <Modal onClick={toggleOpen } contactInfo={{ name, number, id }} />}
+              {isModalOpen && (
+                <Modal
+                  toggleOpen={toggleOpen}
+                  contactInfo={{ name, number, id }}
+                />
+              )}
             </ListItem>
           );
         })}
