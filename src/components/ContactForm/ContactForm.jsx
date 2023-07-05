@@ -47,7 +47,11 @@ const ContactForm = () => {
         />
         <AddButton type="submit">
           <span>Add contacts </span>
-          {isLoading ? <Loader /> : <RiContactsLine size="20" />}
+          {isLoading ? (
+            <Loader color={'#ffffff'} size={'20'} />
+          ) : (
+            <RiContactsLine size="20" />
+          )}
         </AddButton>
       </Form>
     </>

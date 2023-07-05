@@ -1,12 +1,12 @@
 import { Puff } from 'react-loader-spinner';
 
-export const Loader = () => {
+export const Loader = ({color,size}) => {
   return (
     <Puff
-      height="20"
-      width="20"
+      height={size}
+      width={size}
       radius={1}
-      color="#ffffff"
+      color={color}
       ariaLabel="puff-loading"
       wrapperStyle={{}}
       wrapperClass=""

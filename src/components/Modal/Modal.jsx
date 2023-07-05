@@ -14,18 +14,16 @@ import { Loader } from 'components/Loader/Loader';
 import { selectIsLoading } from 'redux/contacts/selectors';
 
 const Modal = ({ contactInfo, toggleOpen }) => {
-	const { name, number, id } = contactInfo;
-	console.log(contactInfo);
+  const { name, number, id } = contactInfo;
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
 
   const handleSubmit = e => {
     e.preventDefault();
     const { name, number } = e.target;
-	  const contact = { name: name.value, number: number.value, id };
-	  console.log(id)
-    dispatch(editContact(contact));
-   //  toggleOpen();
+    const contact = { name: name.value, number: number.value, id };
+	  dispatch(editContact(contact));
+	  toggleOpen();
   };
 
   return (

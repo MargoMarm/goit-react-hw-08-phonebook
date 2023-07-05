@@ -88,7 +88,6 @@ export const contactsSlice = createSlice({
       const index = state.contacts.findIndex(
         contact => contact.id === action.payload.id
       );
-
       state.contacts[index] = action.payload;
     },
   },

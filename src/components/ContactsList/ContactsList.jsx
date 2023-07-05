@@ -11,42 +11,55 @@ import SortedBtns from 'components/SortedBtns/SortedBtns';
 import { useState } from 'react';
 import { Loader } from 'components/Loader/Loader';
 
+
 const ContactList = () => {
-  let visibleContacts = useSelector(selectVisibleContacts);
+  const visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [targetContact, setTargetContact] = useState({});
+
   const toggleOpen = () => setIsModalOpen(!isModalOpen);
+
+  const handleClick = e => {
+    const id = e.currentTarget.parentNode.parentNode.dataset.id;
+    const targetContact = visibleContacts.find(contact => contact.id === id);
+    setTargetContact(targetContact);
+    toggleOpen();
+  };
+	
+	console.log(isLoading)
   return (
     <>
       <SortedBtns />
-      <List>
-        {visibleContacts.map(({ name, number, id }) => {
-          return (
-            <ListItem key={id}>
-              {name}: {number}
-              <BtnWrapper>
-                <Btn type="button" onClick={toggleOpen}>
-                  <RiEditLine size="20" />
-                </Btn>
-                <Btn
-                  delete
-                  type="button"
-                  onClick={() => dispatch(deleteContact(id))}
-                >
-                  {isLoading ? <Loader /> : <RiDeleteBin2Line size="20" />}
-                </Btn>
-              </BtnWrapper>
-              {isModalOpen && (
-                <Modal
-                  toggleOpen={toggleOpen}
-                  contactInfo={{ name, number, id }}
-                />
-              )}
-            </ListItem>
-          );
-        })}
-      </List>
+      {isLoading ? (
+        <Loader color={'#0fc1dd'} size={'50'} />
+      ) : (
+        <List>
+          {visibleContacts.map(({ name, number, id }) => {
+            return (
+              <ListItem data-id={id} key={id}>
+                {name}: {number}
+                <BtnWrapper>
+                  <Btn type="button" onClick={handleClick}>
+                    <RiEditLine size="20" />
+                  </Btn>
+                  <Btn
+                    delete
+                    type="button"
+                    onClick={() => dispatch(deleteContact(id))}
+                  >
+                    {isLoading ? <Loader /> : <RiDeleteBin2Line size="20" />}
+                  </Btn>
+                </BtnWrapper>
+                {isModalOpen && (
+                  <Modal toggleOpen={toggleOpen} contactInfo={targetContact} />
+                )}
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
     </>
   );
 };
