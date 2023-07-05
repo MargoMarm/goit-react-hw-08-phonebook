@@ -7,16 +7,24 @@ import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contacts/operation';
 import Filter from 'components/Filter/Filter';
 
+
+
 const Contacts = () => {
   const contacts = useSelector(selectContacts);
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(fetchContacts())
 	}, [dispatch])
   return (
-    <Section>
-		  <ContactForm />
+	  <Section>
+		  <div>
+			  
+		  <ContactForm  />
 		  <Filter/>
+		  </div>
+		  <div>
+			  
 		  <Title>Contacts</Title>
       <ContactsWrapper>
         {contacts.length > 0 ? (
@@ -25,6 +33,7 @@ const Contacts = () => {
           <Message>Add your first contact</Message>
         )}
       </ContactsWrapper>
+		  </div>
     </Section>
   );
 };

@@ -16,7 +16,7 @@ export const ListItem = styled.li`
   padding: 10px 0;
 `;
 
-export const DeleteBtn = styled.button`
+export const Btn = styled.button`
   width: 32px;
   height: 32px;
   margin-left: 10px;
@@ -32,7 +32,7 @@ export const DeleteBtn = styled.button`
   justify-content: center;
   outline: none;
   position: relative;
-  background: #e55146;
+  background: ${proprs => (proprs.delete ? '#e55146' : '#009688')};
   border: none;
   z-index: 1;
   box-shadow: rgba(255, 255, 255, 0.5) 2px 2px 2px 0px inset,
@@ -46,7 +46,7 @@ export const DeleteBtn = styled.button`
     top: 0;
     right: 0;
     z-index: -1;
-    background-color: #b33e35;
+    background-color: #a5a4a47d;
     border-radius: 5px;
     box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
       7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);

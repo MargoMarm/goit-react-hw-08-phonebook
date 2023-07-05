@@ -2,8 +2,10 @@ import styled from '@emotion/styled';
 
 export const Section = styled.section`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 40px;
 `;
 export const Title = styled.h2`
   font-size: 30px;

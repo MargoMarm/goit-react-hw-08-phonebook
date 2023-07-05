@@ -18,7 +18,8 @@ export const contactsSlice = createSlice({
     error: null,
     isLoading: false,
     sortedAlphabetic: true,
-    recentlyAdded: true,
+	  recentlyAdded: true,
+	 
   },
   reducers: {
     sortByName(state) {

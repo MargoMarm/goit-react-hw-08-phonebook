@@ -1,6 +1,55 @@
 import styled from '@emotion/styled';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0 0 0 / 10%);
+  z-index: 100;
+`;
+
+export const ModalWindow = styled.div`
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 24px);
+`;
+
+export const BtnClose = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: block;
+  height: 30px;
+  width: 30px;
+  right: 10px;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+`;
+
+export const Icon = styled(AiOutlineCloseCircle)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: color 200ms linear;
+  
+  :hover {
+	color: #0fc1dd;
+  }
+
+`;
 
 export const Form = styled.form`
+position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,14 +62,6 @@ export const Form = styled.form`
   border-radius: 10px;
   background-color: white;
 `;
-export const Title = styled.h2`
-  font-size: 30px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 10px;
-`;
-
 
 export const Input = styled.input`
   display: block;
@@ -36,7 +77,6 @@ export const Input = styled.input`
   color: black;
   padding: 7px 0;
   background: transparent;
-
 `;
 
 export const AddButton = styled.button`
