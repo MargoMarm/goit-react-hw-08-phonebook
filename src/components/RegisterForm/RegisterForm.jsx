@@ -1,6 +1,7 @@
 import { Button, Form, Input } from './RegisterForm.styled';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
+import {GiArchiveRegister} from 'react-icons/gi'
 
 const RegisterForm = () => {
 	const dispatch = useDispatch();
@@ -22,7 +23,9 @@ const RegisterForm = () => {
       <Input type="text" name="name" placeholder="Username" />
       <Input type="email" name="email" placeholder="Email" />
       <Input type="password" name="password" placeholder="Password" />
-      <Button type="submit">Register</Button>
+      <Button type="submit">
+        <span>Register</span> <GiArchiveRegister size="20"/>
+      </Button>
     </Form>
   );
 };

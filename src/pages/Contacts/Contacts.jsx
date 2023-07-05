@@ -1,16 +1,23 @@
-import { Title, Message, ContactsWrapper } from './Contacts.styled';
-import { useSelector } from 'react-redux';
+import { Title, Message, ContactsWrapper, Section } from './Contacts.styled';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/selectors';
 import ContactsList from 'components/ContactsList/ContactsList';
 import ContactForm from 'components/ContactForm/ContactForm';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/contacts/operation';
+import Filter from 'components/Filter/Filter';
 
 const Contacts = () => {
   const contacts = useSelector(selectContacts);
-
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchContacts())
+	}, [dispatch])
   return (
-    <>
+    <Section>
+		  <ContactForm />
+		  <Filter/>
 		  <Title>Contacts</Title>
-		  <ContactForm/>
       <ContactsWrapper>
         {contacts.length > 0 ? (
           <ContactsList />
@@ -18,7 +25,7 @@ const Contacts = () => {
           <Message>Add your first contact</Message>
         )}
       </ContactsWrapper>
-    </>
+    </Section>
   );
 };
 

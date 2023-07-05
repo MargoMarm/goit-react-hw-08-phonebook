@@ -8,15 +8,14 @@ import SortedBtns from 'components/SortedBtns/SortedBtns';
 const ContactList = () => {
   let visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
-
   return (
     <>
       <SortedBtns />
       <List>
-        {visibleContacts.map(({ name, phone, id }) => {
+        {visibleContacts.map(({ name, number, id }) => {
           return (
             <ListItem key={id}>
-              {name}: {phone}
+              {name}: {number}
               <BtnWrapper>
                 <DeleteBtn
                   type="button"

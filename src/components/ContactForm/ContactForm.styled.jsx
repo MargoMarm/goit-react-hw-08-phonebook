@@ -4,7 +4,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 400px;
+  width: 400px;
   padding: 25px;
   padding-bottom: 25px;
   border-radius: 5px;
@@ -42,7 +42,7 @@ export const AddButton = styled.button`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 30px;
+  padding: 8px;
   cursor: pointer;
   margin-top: 15px;
   color: rgb(255, 255, 255);

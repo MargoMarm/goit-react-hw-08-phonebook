@@ -2,19 +2,22 @@ import { UseAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 import { Button, UserMenuWrapper, UserName } from './UserMenu.styled';
+import { FiLogOut  } from 'react-icons/fi';
 
 const UserMenu = () => {
-	const { user } = UseAuth();
-	const dispatch = useDispatch();
-	
-	const handleLogOut = () => {
-		dispatch(logOut());
-	}
+  const { user } = UseAuth();
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
 
   return (
     <UserMenuWrapper>
       <UserName>Welcome,{user.name}</UserName>
-      <Button type="button" onClick={handleLogOut}>Logout</Button>
+      <Button type="button" onClick={handleLogOut}>
+        <span>Logout</span> <FiLogOut size="20" />
+      </Button>
     </UserMenuWrapper>
   );
 };

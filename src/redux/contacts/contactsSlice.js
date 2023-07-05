@@ -32,8 +32,8 @@ export const contactsSlice = createSlice({
     sortByAdded(state) {
       state.contacts = state.contacts.sort((firstContact, secondContact) =>
         state.recentlyAdded
-          ? secondContact.id - firstContact.id
-          : firstContact.id - secondContact.id
+          ? firstContact.id.localeCompare(secondContact.id)
+          : secondContact.id.localeCompare(firstContact.id)
       );
       state.recentlyAdded = !state.recentlyAdded;
     },

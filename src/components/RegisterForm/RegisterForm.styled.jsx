@@ -36,8 +36,9 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap:8px;
   width: 100%;
-  height: 30px;
+  padding: 8px;
   cursor: pointer;
   margin-top: 15px;
   color: rgb(255, 255, 255);
@@ -77,8 +78,7 @@ export const Button = styled.button`
     left: 0;
     width: 100%;
   }
-  /* > span {
-    margin-right: 10px;
+  > span {
     font-size: 18px;
-  } */
+  }
 `;

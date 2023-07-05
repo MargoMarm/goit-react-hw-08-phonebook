@@ -12,8 +12,8 @@ const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { name, phone } = e.target;
-    const contact = { name: name.value, phone: phone.value };
+    const { name, number } = e.target;
+    const contact = { name: name.value, number: number.value };
     if (contacts.find(existingContact => existingContact.name === name.value)) {
       Notiflix.Notify.failure(`${contact.name} is already in your contacts`);
     } else {
@@ -36,7 +36,7 @@ const ContactForm = () => {
         />
         <Input
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

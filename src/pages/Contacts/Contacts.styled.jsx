@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
 
+export const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 export const Title = styled.h2`
   font-size: 30px;
   font-weight: 600;
@@ -8,7 +13,7 @@ export const Title = styled.h2`
   margin-bottom: 10px;
 `;
 export const ContactsWrapper = styled.div`
-  max-width: 400px;
+  width: 400px;
   margin-bottom: 35px;
   box-shadow: 1px 7px 14px 0px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
@@ -20,4 +25,6 @@ export const ContactsWrapper = styled.div`
 export const Message = styled.p`
   font-size: 30px;
   font-weight: 400;
+  margin:0;
+  text-align:center;
 `;
