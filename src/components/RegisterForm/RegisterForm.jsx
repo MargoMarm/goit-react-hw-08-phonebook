@@ -1,7 +1,7 @@
-import { Button, Form, Input } from './RegisterForm.styled';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import {GiArchiveRegister} from 'react-icons/gi'
+import { Button, Form, Input } from './RegisterForm.styled';
 
 const RegisterForm = () => {
 	const dispatch = useDispatch();

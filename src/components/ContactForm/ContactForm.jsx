@@ -1,17 +1,15 @@
-import { Input, AddButton, Form, Title } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contacts/operation';
+import { Input, AddButton, Form, Title } from './ContactForm.styled';
 import { RiContactsLine } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contacts/selectors';
 import Notiflix from 'notiflix';
-import { Loader } from 'components/Loader/Loader';
-import { selectIsLoading } from 'redux/contacts/selectors';
+import  Loader  from '../Loader/Loader';
+import { addContact } from 'redux/contacts/operation';
+import { useContacts } from 'hooks/useContact';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
+	const { contacts } = useContacts();
+  const {isLoading} = useContacts();
 
   const handleSubmit = e => {
     e.preventDefault();

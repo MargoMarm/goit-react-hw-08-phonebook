@@ -52,7 +52,7 @@ export const Btn = styled.button`
     top: 0;
     right: 0;
     z-index: -1;
-    background-color: #a5a4a47d;
+    background-color: #54515193;
     border-radius: 5px;
     box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
       7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);

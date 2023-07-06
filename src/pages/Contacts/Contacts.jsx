@@ -1,15 +1,15 @@
 import { Title, Message, ContactsWrapper, Section } from './Contacts.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contacts/selectors';
+import { useDispatch} from 'react-redux';
+import { useEffect } from 'react';
 import ContactsList from 'components/ContactsList/ContactsList';
 import ContactForm from 'components/ContactForm/ContactForm';
-import { useEffect } from 'react';
-import { fetchContacts } from 'redux/contacts/operation';
 import Filter from 'components/Filter/Filter';
+import { fetchContacts } from 'redux/contacts/operation';
+import { useContacts } from 'hooks/useContact';
 
 const Contacts = () => {
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const { contacts } = useContacts();
 
   useEffect(() => {
     dispatch(fetchContacts());

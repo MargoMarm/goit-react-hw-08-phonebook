@@ -1,24 +1,18 @@
+import { useDispatch } from 'react-redux';
+import { sortByAdded, sortByName } from 'redux/contacts/contactSlice';
+import { SortBtn, BtnWrapper } from './SortedBtns.styled';
+import { useContacts } from 'hooks/useContact';
 import {
-  sortByAdded,
-  sortByName,
-} from 'redux/contacts/contactsSlice';
-import {
-  selectSortedAlphabetic,
-  selectRecentlyAdded,
-} from 'redux/contacts/selectors';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  TbSortAscendingLetters,
+TbSortAscendingLetters,
   TbSortDescendingLetters,
   TbSortAscending2,
   TbSortDescending2,
 } from 'react-icons/tb';
-import { SortBtn, BtnWrapper } from './SortedBtns.styled';
 
 const SortedBtns = () => {
-  const sortedAlphabetic = useSelector(selectSortedAlphabetic);
-  const recentlyAdded = useSelector(selectRecentlyAdded);
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
+  const {sortedAlphabetic} = useContacts();
+  const {recentlyAdded }= useContacts();
   return (
     <BtnWrapper>
       <SortBtn onClick={() => dispatch(sortByName())}>

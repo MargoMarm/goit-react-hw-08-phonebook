@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { Button, Form, Input } from './LoginForm.styled';
 import { logIn } from 'redux/auth/operations';
 import { FiLogIn } from 'react-icons/fi';
+import { Button, Form, Input } from './LoginForm.styled';
 
 const LoginForm = () => {
   const dispatch = useDispatch();

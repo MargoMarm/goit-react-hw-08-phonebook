@@ -11,10 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
-import contactsReducer from './contacts/contactsSlice';
+import contactsReducer from './contacts/contactSlice';
 import filterReducer from './contacts/filterSlice';
-
-
 
 const authPersistConfig = {
   key: 'auth',
@@ -29,8 +27,8 @@ export const store = configureStore({
     contacts: contactsReducer,
     filter: filterReducer,
     auth: persistedAuthReducer,
-	},
-	
+  },
+
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
       serializableCheck: {

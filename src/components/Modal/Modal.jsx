@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { editContact } from 'redux/contacts/operation';
+import { RiContactsLine } from 'react-icons/ri';
+import { selectIsLoading } from 'redux/contacts/selectors';
+import  Loader  from '../Loader/Loader';
 import {
   BtnClose,
   ModalWindow,
@@ -9,9 +12,6 @@ import {
   AddButton,
   Icon,
 } from './Modal.styled';
-import { RiContactsLine } from 'react-icons/ri';
-import { Loader } from 'components/Loader/Loader';
-import { selectIsLoading } from 'redux/contacts/selectors';
 
 const Modal = ({ contactInfo, toggleOpen }) => {
   const { name, number, id } = contactInfo;

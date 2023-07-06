@@ -1,21 +1,28 @@
-import { List, ListItem, Btn, BtnWrapper, LoaderStyled } from './ContactsList.styled';
-import Modal from '../Modal/Modal';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { RiDeleteBin2Line, RiEditLine } from 'react-icons/ri';
 import { deleteContact } from 'redux/contacts/operation';
-import { useSelector, useDispatch } from 'react-redux';
 import {
-  selectIsLoading,
-  selectVisibleContacts,
-} from 'redux/contacts/selectors';
-import SortedBtns from 'components/SortedBtns/SortedBtns';
-import { useState } from 'react';
-import { Loader } from 'components/Loader/Loader';
+  List,
+  ListItem,
+  Btn,
+  BtnWrapper,
+  LoaderStyled,
+} from './ContactsList.styled';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import Modal from '../Modal/Modal';
+import SortedBtns from '../SortedBtns/SortedBtns';
+import Loader from '../Loader/Loader';
+import { useContacts } from 'hooks/useContact';
+import Notiflix from 'notiflix';
+
+
 
 
 const ContactList = () => {
-  const visibleContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  const { visibleContacts } = useContacts();
+  const { isLoading } = useContacts();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [targetContact, setTargetContact] = useState({});
 
@@ -27,45 +34,57 @@ const ContactList = () => {
     setTargetContact(targetContact);
     toggleOpen();
   };
-	
+
+	const handleDelete = id => {
+		Notiflix.Confirm.init({ okButtonColor: '#73dbeb', width: '600px' });
+
+    Confirm.show(
+      'Deleting contact',
+      'Do you wanst delete this contact?',
+      'Yes',
+      'No',
+      () => {
+        dispatch(deleteContact(id));
+      },
+
+      {  }
+    );
+  };
+
   return (
     <>
       <SortedBtns />
-		  {isLoading ? (
-			  <LoaderStyled>
-				  {' '}
-				  <Loader color={'#0fc1dd'} size={'50'} />
-			  </LoaderStyled>
-		  ) : (
-			  <List>
-				  {visibleContacts.map(({ name, number, id }) => {
-					  return (
-						  <ListItem data-id={id} key={id}>
-							  {name}: {number}
-							  <BtnWrapper>
-								  <Btn type="button" onClick={handleClick}>
-									  <RiEditLine size="20" />
-								  </Btn>
-								  <Btn
-									  delete
-									  type="button"
-									  onClick={() => dispatch(deleteContact(id))}
-								  >
-									  {isLoading ? (
-										  <Loader color={'#ffffff'} size={'20'} />
-									  ) : (
-										  <RiDeleteBin2Line size="20" />
-									  )}
-								  </Btn>
-							  </BtnWrapper>
-							  {isModalOpen && (
-								  <Modal toggleOpen={toggleOpen} contactInfo={targetContact} />
-							  )}
-						  </ListItem>
-					  );
-				  })}
-			  </List>
-		  )}
+      {isLoading ? (
+        <LoaderStyled>
+          {' '}
+          <Loader color={'#0fc1dd'} size={'50'} />
+        </LoaderStyled>
+      ) : (
+        <List>
+          {visibleContacts.map(({ name, number, id }) => {
+            return (
+              <ListItem data-id={id} key={id}>
+                {name}: {number}
+                <BtnWrapper>
+                  <Btn type="button" onClick={handleClick}>
+                    <RiEditLine size="20" />
+                  </Btn>
+                  <Btn delete type="button" onClick={ () => handleDelete(id)}>
+                    {isLoading ? (
+                      <Loader color={'#ffffff'} size={'20'} />
+                    ) : (
+                      <RiDeleteBin2Line size="20" />
+                    )}
+                  </Btn>
+                </BtnWrapper>
+                {isModalOpen && (
+                  <Modal toggleOpen={toggleOpen} contactInfo={targetContact} />
+                )}
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
     </>
   );
 };

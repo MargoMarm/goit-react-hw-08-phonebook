@@ -43,18 +43,16 @@ export const contactsSlice = createSlice({
       );
       state.recentlyAdded = !state.recentlyAdded;
     },
-	},
-  
-
+  },
 
   extraReducers: {
     [fetchContacts.pending]: handlePending,
     [addContact.pending]: handlePending,
     [deleteContact.pending]: handlePending,
-	  [editContact.pending](state, action) {
-		  state.isLoading = true;
-		  state.shouldOpenModal = true;
-	 },
+    [editContact.pending](state, action) {
+      state.isLoading = true;
+      state.shouldOpenModal = true;
+    },
 
     [fetchContacts.rejected]: handleRejected,
     [addContact.rejected]: handleRejected,
@@ -80,7 +78,10 @@ export const contactsSlice = createSlice({
       state.error = null;
       state.contacts = state.contacts.filter(
         contact => contact.id !== action.payload.id
-      );
+		);
+		 Notiflix.Notify.success(
+       `${action.payload.name} has been successfully deleted from your phonebook`
+     );
     },
     [editContact.fulfilled](state, action) {
       state.isLoading = false;

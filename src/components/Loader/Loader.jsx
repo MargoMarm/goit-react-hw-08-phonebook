@@ -1,6 +1,5 @@
 import { Puff } from 'react-loader-spinner';
-
-export const Loader = ({color,size}) => {
+ const Loader = ({color,size}) => {
   return (
     <Puff
       height={size}
@@ -15,3 +14,5 @@ export const Loader = ({color,size}) => {
     />
   );
 };
+
+export default Loader;
