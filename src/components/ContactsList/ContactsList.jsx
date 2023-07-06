@@ -1,4 +1,4 @@
-import { List, ListItem, Btn, BtnWrapper } from './ContactsList.styled';
+import { List, ListItem, Btn, BtnWrapper, LoaderStyled } from './ContactsList.styled';
 import Modal from '../Modal/Modal';
 import { RiDeleteBin2Line, RiEditLine } from 'react-icons/ri';
 import { deleteContact } from 'redux/contacts/operation';
@@ -28,38 +28,44 @@ const ContactList = () => {
     toggleOpen();
   };
 	
-	console.log(isLoading)
   return (
     <>
       <SortedBtns />
-      {isLoading ? (
-        <Loader color={'#0fc1dd'} size={'50'} />
-      ) : (
-        <List>
-          {visibleContacts.map(({ name, number, id }) => {
-            return (
-              <ListItem data-id={id} key={id}>
-                {name}: {number}
-                <BtnWrapper>
-                  <Btn type="button" onClick={handleClick}>
-                    <RiEditLine size="20" />
-                  </Btn>
-                  <Btn
-                    delete
-                    type="button"
-                    onClick={() => dispatch(deleteContact(id))}
-                  >
-                    {isLoading ? <Loader /> : <RiDeleteBin2Line size="20" />}
-                  </Btn>
-                </BtnWrapper>
-                {isModalOpen && (
-                  <Modal toggleOpen={toggleOpen} contactInfo={targetContact} />
-                )}
-              </ListItem>
-            );
-          })}
-        </List>
-      )}
+		  {isLoading ? (
+			  <LoaderStyled>
+				  {' '}
+				  <Loader color={'#0fc1dd'} size={'50'} />
+			  </LoaderStyled>
+		  ) : (
+			  <List>
+				  {visibleContacts.map(({ name, number, id }) => {
+					  return (
+						  <ListItem data-id={id} key={id}>
+							  {name}: {number}
+							  <BtnWrapper>
+								  <Btn type="button" onClick={handleClick}>
+									  <RiEditLine size="20" />
+								  </Btn>
+								  <Btn
+									  delete
+									  type="button"
+									  onClick={() => dispatch(deleteContact(id))}
+								  >
+									  {isLoading ? (
+										  <Loader color={'#ffffff'} size={'20'} />
+									  ) : (
+										  <RiDeleteBin2Line size="20" />
+									  )}
+								  </Btn>
+							  </BtnWrapper>
+							  {isModalOpen && (
+								  <Modal toggleOpen={toggleOpen} contactInfo={targetContact} />
+							  )}
+						  </ListItem>
+					  );
+				  })}
+			  </List>
+		  )}
     </>
   );
 };

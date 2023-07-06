@@ -10,7 +10,8 @@ export const Loader = ({color,size}) => {
       ariaLabel="puff-loading"
       wrapperStyle={{}}
       wrapperClass=""
-      visible={true}
+		  visible={true}
+		  
     />
   );
 };

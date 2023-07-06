@@ -7,33 +7,29 @@ import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contacts/operation';
 import Filter from 'components/Filter/Filter';
 
-
-
 const Contacts = () => {
   const contacts = useSelector(selectContacts);
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(fetchContacts())
-	}, [dispatch])
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
   return (
-	  <Section>
-		  <div>
-			  
-		  <ContactForm  />
-		  <Filter/>
-		  </div>
-		  <div>
-			  
-		  <Title>Contacts</Title>
-      <ContactsWrapper>
-        {contacts.length > 0 ? (
-          <ContactsList />
-        ) : (
-          <Message>Add your first contact</Message>
-        )}
-      </ContactsWrapper>
-		  </div>
+    <Section>
+      <div>
+        <ContactForm />
+        <Filter />
+      </div>
+      <div>
+        <Title>Contacts</Title>
+        <ContactsWrapper>
+          {contacts.length > 0 ? (
+            <ContactsList />
+          ) : (
+            <Message>Add your first contact</Message>
+          )}
+        </ContactsWrapper>
+      </div>
     </Section>
   );
 };

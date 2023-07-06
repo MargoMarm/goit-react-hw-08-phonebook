@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
 
+export const LoaderStyled = styled.span`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
 export const List = styled.ul`
   list-style: none;
   margin: 0;

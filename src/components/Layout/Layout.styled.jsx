@@ -6,3 +6,8 @@ export const ContentWrapper = styled.div`
   padding: 0px 16px;
 `;
 	
+export const LoaderStyled = styled.span`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
