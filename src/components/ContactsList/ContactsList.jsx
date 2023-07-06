@@ -14,7 +14,6 @@ import Modal from '../Modal/Modal';
 import SortedBtns from '../SortedBtns/SortedBtns';
 import Loader from '../Loader/Loader';
 import { useContacts } from 'hooks/useContact';
-import Notiflix from 'notiflix';
 
 
 
@@ -36,8 +35,6 @@ const ContactList = () => {
   };
 
 	const handleDelete = id => {
-		Notiflix.Confirm.init({ okButtonColor: '#73dbeb', width: '600px' });
-
     Confirm.show(
       'Deleting contact',
       'Do you wanst delete this contact?',
@@ -46,8 +43,6 @@ const ContactList = () => {
       () => {
         dispatch(deleteContact(id));
       },
-
-      {  }
     );
   };
 

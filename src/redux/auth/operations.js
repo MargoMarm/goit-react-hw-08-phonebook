@@ -29,16 +29,13 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   'auth/login',
   async (userData, thunkAPI) => {
-	  try {
+    try {
       const response = await axios.post('/users/login', userData);
       // After successful login, add the token to the HTTP header
       setAuthHeader(response.data.token);
-      console.log(response.data);
 
       return response.data;
-	 } catch (error) {
-		       console.log(error);
-
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -64,11 +61,10 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-		 const response = await axios.get('/users/current');
+      const response = await axios.get('/users/current');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-

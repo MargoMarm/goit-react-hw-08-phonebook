@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { register, logIn, logOut, refreshUser } from './operations';
+import {Notify }from 'notiflix';
+
 
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
-  isRefreshing: false,
+	isRefreshing: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -37,7 +40,12 @@ const authSlice = createSlice({
     },
     [refreshUser.rejected](state) {
       state.isRefreshing = false;
-    },
+	  },
+	  [logIn.rejected](state, action) {
+		  state.error = action.payload;
+		  Notify.failure('Wrong email or password! Please try again.');
+
+	 }
   },
 });
 
